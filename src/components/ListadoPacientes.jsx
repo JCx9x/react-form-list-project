@@ -1,48 +1,42 @@
-import Paciente from "./Paciente";
+import Paciente from "./Paciente"
 
-const ListadoPacientes = ({ pacientes }) => {
-  
+const ListadoPacientes = ({pacientes, setPaciente, eliminarPaciente}) => {
+    return (
+        <div className="md:w-1/2 lg:w-3/5 md:h-screen ">
 
-  return (
-    <div className="md:w-1/2 lg:w-3/5 w-full">
+            {pacientes && pacientes.length ? (
+                <>
+                    <h2 className="font-black text-3xl text-center">Listado Pacientes</h2>
+                    <p className="text-xl mt-5 mb-10 text-center">
+                        Administra tus {''}
+                        <span className="text-indigo-600 font-bold ">Pacientes y Citas</span>
+                    </p>
 
-      {pacientes && pacientes.length ? (
-        <>
-          <h2 className="font-bold text-3xl text-center mt-10 md:mt-0">Listado de pacientes</h2>
-          <p className="text-lg mt-5 text-center"> 
-            Administra tus {' '}
-            <span className="text-indigo-600 font-bold">
-              pacientes y citas
-            </span>
-          </p>
+                    <div className="overflow-y-scroll">
+                    { pacientes.map( paciente => (
+                        <Paciente 
+                            key={paciente.id}
+                            paciente={paciente}
+                            setPaciente={setPaciente}
+                            eliminarPaciente={eliminarPaciente}
+                        />
+                    ))}
+                    </div>
 
-          <div>
-            {pacientes.map((paciente) => (
-              <Paciente 
-              key={paciente.id}
-              paciente={paciente} />
-            ))}
-          </div>
+                  
+                </>
 
-        </>
-      ) : (
-        <>
+            ) : (
+                <>
+                    <h2 className="font-black text-3xl text-center">No hay pacientes</h2>
+                    <p className="text-xl mt-5 mb-10 text-center">
+                        Comienza agregando pacientes {''}
+                        <span className="text-indigo-600 font-bold ">y aparecerán en este lugar</span>
+                    </p>
+                </>
+            )}
+        </div>
+    )
+}
 
-          <h2 className="font-bold text-3xl text-center mt-10 md:mt-0">No hay pacientes</h2>
-          <p className="text-lg mt-5 text-center"> 
-            Comienza a agregar {' '}
-            <span className="text-indigo-600 font-bold">
-              pacientes.
-            </span>
-          </p>
-
-        </>
-      )}
-
-      
-
-    </div>
-  );
-};
-
-export default ListadoPacientes;
+export default ListadoPacientes
